@@ -1,3 +1,7 @@
+% =========================================================================
+% AEC: RECORD LIVE -> FILTER -> SAVE TO FILE (VERSION 2 - INDEX FIXED)
+% Duration: 10 Seconds | Output: removed_echo.wav
+% =========================================================================
 clear; clc;
 
 % 1. PARAMETERS & CONFIGURATION
