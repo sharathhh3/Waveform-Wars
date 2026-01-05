@@ -10,102 +10,115 @@
 
 ## Project Overview
 
-This repository contains the complete implementation for the **Waveform Wars – DSP Design Challenge**, addressing both mandatory problem statements using **pure Digital Signal Processing (DSP) techniques** implemented in **MATLAB**.
+This repository contains the complete MATLAB-based implementation for the **Waveform Wars – DSP Design Challenge**. The project addresses **both mandatory problem statements** using **pure Digital Signal Processing (DSP) techniques**, strictly adhering to the competition rules (no machine learning or pretrained models).
 
-The project focuses on:
+The two problems solved are:
 
-1. **Acoustic Echo Cancellation (AEC)** for hands-free systems using adaptive filtering
-2. **Audio Source Separation (BSS)** using time–frequency analysis and spectral masking
-
-No machine learning, pretrained models, or AI-based libraries are used, in strict compliance with the competition rules.
+1. **Acoustic Echo Cancellation (AEC)** in hands-free systems
+2. **Audio Source Separation (BSS)** using frequency-domain analysis
 
 ---
 
 ## Repository Structure
 
+The repository is organized into clearly separated folders for code and results of each problem statement:
+
 ```
 .
-├── PS1_Acoustic_Echo_Cancellation.m
-├── PS2_Audio_Source_Separation.m
-├── removed_echo.wav
-├── EXTRACTED_SPEECH.wav
-├── EXTRACTED_INTERFERENCE.wav
-├── Report.pdf
+├── PS1/
+│   └── Code/
+│       └── echo_cancellation.m
+│
+├── PS1_RESULTS/
+│   ├── removed_echo.wav
+│   └── PS1_plots.png
+│
+├── PS2/
+│   └── Code/
+│       └── separation.m
+│
+├── PS2_RESULTS/
+│   ├── EXTRACTED_SPEECH.wav
+│   ├── EXTRACTED_INTERFERENCE.wav
+│   └── PS2_spectrograms.png
+│
+├── Waveform Wars Team-Ep Report.pdf
 └── README.md
 ```
 
-> Note: Output `.wav` files are generated after successful execution of the MATLAB scripts.
-
 ---
 
-## Problem Statement 1: Acoustic Echo Cancellation
+## Problem Statement 1: Acoustic Echo Cancellation (PS1)
 
 ### Description
 
-In hands-free audio systems, the microphone captures both the desired near-end speech and an undesired echo of the far-end loudspeaker signal. This module implements an **NLMS-based adaptive filter** to model the acoustic echo path and cancel the echo in real time.
+In hands-free audio systems, the microphone captures both the desired near-end speech and an undesired echo of the far-end loudspeaker signal. This module implements an **NLMS-based adaptive filter** to estimate the acoustic echo path and suppress the echo effectively.
 
-### Key Techniques Used
+### Techniques Used
 
 * Normalized Least Mean Squares (NLMS) adaptive filtering
 * Long-tap FIR filter for room impulse response modeling
-* Energy-based stability handling during double-talk scenarios
-* Residual noise suppression using soft gating
+* Energy-based stability handling for double-talk conditions
+* Residual echo suppression using soft gating
 
-### Input
+### How to Run PS1
 
-* Live microphone input
-* Far-end reference signal (played audio)
+1. Navigate to the PS1 code directory:
+
+   ```bash
+   cd PS1/Code
+   ```
+2. Open MATLAB and run:
+
+   ```matlab
+   Acoustic_Echo_Cancellation
+   ```
+3. Ensure a microphone and speaker/headphones are connected
+4. Speak during the recording phase while audio plays
 
 ### Output
 
-* `removed_echo.wav` — echo-suppressed microphone signal
+All results are stored in the **PS1_RESULTS/** folder:
 
-### How to Run
-
-1. Connect a microphone and speaker/headphones
-2. Open MATLAB
-3. Run:
-
-   ```matlab
-   PS1_Acoustic_Echo_Cancellation
-   ```
-4. Speak during recording while audio plays
-5. Output file will be saved automatically
+* `removed_echo.wav` – Echo-cancelled microphone signal
+* Time-domain waveform plots
 
 ---
 
-## Problem Statement 2: Audio Source Separation
+## Problem Statement 2: Audio Source Separation (PS2)
 
 ### Description
 
-This module separates two simultaneously active audio sources (speech and tonal interference) from a single-channel recording using **STFT-based spectral masking**.
+This module separates two simultaneously active audio sources (speech and tonal interference) from a single-channel recording using **STFT-based spectral masking**, without any learning-based methods.
 
-### Key Techniques Used
+### Techniques Used
 
 * Short-Time Fourier Transform (STFT)
-* Statistical noise profiling
+* Statistical noise profiling from initial frames
 * Adaptive frequency-domain masking
 * Median filtering for artifact reduction
 
-### Input
+### How to Run PS2
 
-* `mixed.wav` (placed in the `Downloads` directory)
+1. Place the input file `mixed.wav` in your system **Downloads** directory
+2. Navigate to the PS2 code directory:
+
+   ```bash
+   cd PS2/Code
+   ```
+3. Open MATLAB and run:
+
+   ```matlab
+   Audio_Source_Separation
+   ```
 
 ### Output
 
-* `EXTRACTED_SPEECH.wav` — separated speech signal
-* `EXTRACTED_INTERFERENCE.wav` — separated tonal interference
+All results are stored in the **PS2_RESULTS/** folder:
 
-### How to Run
-
-1. Place `mixed.wav` in your system `Downloads` folder
-2. Open MATLAB
-3. Run:
-
-   ```matlab
-   PS2_Audio_Source_Separation
-   ```
-4. Output files will be saved to the `Downloads` directory
+* `EXTRACTED_SPEECH.wav` – Separated speech signal
+* `EXTRACTED_INTERFERENCE.wav` – Separated interference signal
+* Spectrogram visualizations
 
 ---
 
@@ -113,11 +126,11 @@ This module separates two simultaneously active audio sources (speech and tonal 
 
 * MATLAB R2021a or later
 * Signal Processing Toolbox
-* DSP System Toolbox (for real-time audio I/O in PS1)
+* DSP System Toolbox (required for real-time audio I/O in PS1)
 
 ---
 
-## Constraints and Compliance
+## Compliance Statement
 
 ✔ Pure DSP-based implementation
 ✔ No machine learning or neural networks
@@ -126,11 +139,11 @@ This module separates two simultaneously active audio sources (speech and tonal 
 
 ---
 
-## Notes for Evaluation
+## Notes for Evaluators
 
-* Filter lengths and step sizes are tunable for different acoustic environments
+* Filter length and step size parameters are configurable for different acoustic environments
 * Source separation assumes partial frequency-domain separability
-* All algorithms are explainable and mathematically interpretable
+* All algorithms are mathematically interpretable and explainable
 
 ---
 
